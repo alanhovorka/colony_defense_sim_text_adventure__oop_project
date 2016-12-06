@@ -8,6 +8,9 @@ from walls import Walls
 from bedroom import Bedroom
 from rec import Rec
 from character import Character
+from enemy import Enemy
+import random
+#win the game by killing all raiders or securing the base. 
 
 class Game:
     def __init__(self):
@@ -17,7 +20,7 @@ Complete the game by defeating the raiders. You can move north, south, east or w
 Type q to end the program.\n"""
 
     def show_intro(self):
-        print(self.intro)
+        print("\nHello, {}. {} ".format(player.name, self.intro))
 
     def main(self):
         self.show_intro()
@@ -59,6 +62,7 @@ walls = Walls("walls")
 bedroom = Bedroom("bedroom")
 courtyard = Courtyard("courtyard")
 dining = DiningRoom("dining room")
-player = Player("Alan", courtyard)
+player = Player(name, 20, 10, courtyard)
+name = input("Enter name:  \n")
 
 game.main()

@@ -1,11 +1,3 @@
-from armory import Armory
-from kitchen import Kitchen
-from entry import EntryWay
-from dining_room import DiningRoom
-from courtyard import Courtyard
-from walls import Walls
-from bedroom import Bedroom
-from rec import Rec
 import random
 
 class Character:
@@ -35,4 +27,3 @@ class Character:
             print("\n{} has been killed!\n".format(dead))
             return dead
 
-    

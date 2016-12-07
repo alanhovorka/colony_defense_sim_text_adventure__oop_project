@@ -1,13 +1,6 @@
-from armory import Armory
-from kitchen import Kitchen
-from entry import EntryWay
-from dining_room import DiningRoom
-from courtyard import Courtyard
-from walls import Walls
-from bedroom import Bedroom
-from rec import Rec
 from character import Character
 import random
+import time
 
 #need to create a use function and a reload function, maybe too complicated
 

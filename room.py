@@ -27,6 +27,7 @@ class Room:
         else:
             return "\nNot an option\n"
     def get_random_enemy(self):
+# return Enemy(random.choice(enemies), random.randint(4, 6), random.randint(2, 4))
         rand_index = random.randrange(len(Room.enemies))
         random_enemy = Room.enemies.pop(rand_index)
         return Enemy(random_enemy, random.randint(4,6), random.randint(2,4))

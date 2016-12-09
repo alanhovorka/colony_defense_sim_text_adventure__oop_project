@@ -2,8 +2,8 @@ from enemy import Enemy
 import random
 
 class Room:
-    enemies = ["", "", "", "", "", "", ""]
-    raid = ["", "", "", "", "", "", ""]
+    enemies = ["Feral dog", "Caspian Mole", "Space Rat", "Malfunctioning Robot", "Malfunctioning Turret"]
+
 
     #do I need separate enemy lists or can I just desginate to spawn enemies within an index range?
 

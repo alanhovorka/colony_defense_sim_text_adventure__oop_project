@@ -5,7 +5,7 @@ import time
 #need to create a use function and a reload function, maybe too complicated
 
 class Player(Character):
-    all_items = ["knife", ".45 automatic pistol", "Survival Rifle", "Concrete", "Wood boards", "Batteries (Ammo)", ".50 Caliber Ammo Box", "36 .45 cartridges", "60 .308 cartridges"] #all possible items, write a command that tells them they've found all possible items
+    all_items = ["Knife", ".45 Automatic Pistol", "Survival Rifle", "Concrete", "Wood boards", "Batteries (Ammo)", ".50 Caliber Ammo Box", "36 .45 cartridges", "60 .308 cartridges"] #all possible items, write a command that tells them they've found all possible items
     all_enemies = ["Raider Beserker", "Caspian Mole", "Raider Leader", "Raider Grunt", "Raider", "Feral dog", "Space Rat", "Malfunctioning Robot", "Malfunctioning Turret", "Raider Merc", "Raider Bruiser"] #all possible enemies
     
     def __init__(self, name, health, attack_pts, location):
@@ -80,4 +80,12 @@ class Player(Character):
 
     def check_kill_list(self):
         print("\nKill list: {}\n".format(', '.join(self.kill_list)))
+
+    #Need to be at the walls    
+    def repair_wall(self):
+        if "Concrete" in items:
+            remove.player.items("Concrete")
+            walls.condition = "Repaired"
+            print("You've repaired the southern wall.")
+
 

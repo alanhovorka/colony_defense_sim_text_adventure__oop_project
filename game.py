@@ -12,8 +12,11 @@ from character import Character
 from living_room import LivingRoom
 from enemy import Enemy
 from reactor import Reactor
+from workshop import Workshop
 import random
 import time
+
+#prevent enemies from spawning in certain rooms
 
 class Game:
     def __init__(self):
@@ -23,9 +26,11 @@ After burying the dead, you survey the colony. The only way into the colony is t
 You see that the main power to the base is offline, leaving the autoturrets offline and the main gate unlocked. 
 You'll have to search your base for whatever supplies are left. The colony was running low on supplies before the raider attack. The attack has left the base mostly barren. 
 You might find some items leftover, however. You'll need to find ammo, weapons and building supplies to fix the south walls.  
-Each room will tell you which directions you can go. Be careful you heard some crashes and rustling in the colony as you buried the bodies. 
-Complete the game by defeating the raiders and repairing your base. You can move north, south, east or west by typing n,s,e or w.
+Each room will tell you which directions you can go. Be careful because you heard some crashes and rustling in the colony as you buried the bodies. 
+Complete the game by defeating the raiders and repairing your base. You can move north, south, east or west by typing n,s,e or w. 
 Type q to end the program.\n"""
+
+#You have 10 minutes to find all of the supplies, repair the base and defeat the enemies or you lose.
 
     def show_intro(self):
         print("\nHello, {}. {} ".format(player.name, self.intro))
@@ -59,6 +64,8 @@ Type q to end the program.\n"""
                 loc = lr
             elif new_loc == "reactor":
                 loc = reactor
+            elif new_loc == "workshop":
+                loc = workshop
             elif new_loc == "q":
                 print("Exit game")
                 run = False
@@ -75,12 +82,13 @@ rec = Recreation("Rec")
 kitchen = Kitchen("kitchen")
 entry = EntryWay("entry way")
 walls = Walls("walls")
-lr = LivingRoom("lr")
+lr = LivingRoom("living room")
 bedroom = Bedroom("bedroom")
 walls = Walls("walls")
 courtyard = Courtyard("courtyard")
 dining = DiningRoom("dining room")
 reactor = Reactor("reactor")
+workshop = Workshop("workshop")
 player = Player(name, 20, 10, courtyard)
 name = input("Enter name:  \n")
 

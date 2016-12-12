@@ -8,9 +8,17 @@ import random
 #Should be a use function that repairs the walls, turrets and locks the gate
 #How to make turrets act as friendly npcs
 
+#need of a list of items in the rooms
+
+
 class Walls(Room):
 	#raid = ["Raider Beserker", "Raider Grunt", "Raider", "Raider", "Raider Merc", "Raider Bruiser"]
 	#raidlead = ["Raider Leader"]
+	condition = "Damaged"
+	base_power = "Offline" #Turning the power back on in the reactor room should flip this to online
+	turret_power = "Offline"
+	gate_powerr = "Offline"
+	turrets_condition = [] #maybe a dictionary of the npcs and their damaged conditions and when it's all functional triggers the raid  {"South Turret 1": "Damaged", "South Turret 2": "functional"}
 	turrets = ["South Turret 1", "South Turret 2", "Southeast Corner Turret", "Southwest Corner Turret", "West Turret", "East Turret"]
 	def __init__(self, name):
 		super().__init__(name)
@@ -22,3 +30,5 @@ class Walls(Room):
 
 #get 
 #walls, contains enemies, but player chooses when to attack them. turrets to interact with and things to repair, use function 
+
+#method that checks to see if the 

@@ -30,7 +30,7 @@ class Room:
 # return Enemy(random.choice(enemies), random.randint(4, 6), random.randint(2, 4))
         rand_index = random.randrange(len(Room.enemies))
         random_enemy = Room.enemies.pop(rand_index)
-        return Enemy(random_enemy, random.randint(4,6), random.randint(2,4))
+        return Enemy(random_enemy, random.randint(4, 6), random.randint(2, 4))
 
     def show_enemy(self):
         print("There is a {} in the room!".format(self.enemy.name))

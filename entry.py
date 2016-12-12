@@ -1,11 +1,20 @@
 from room import Room
 
+#no enemy here
+
 class EntryWay(Room):
 	"""docstring for Entry"""
 	def __init__(self, name):
 		super().__init__(name)
 		self.description = """\n
-		#insert description
+		You step inside the colony's main entryway. There are opened boxes scattered about the hallway. They might contain something.
+		Blood streaks lead north into the workshop. 
+		You can head west into the armory, east to the living room and north to the workshop. 
 		\n"""
-		self.contents = []
-		self.doors = {"": "", "": ""}	
+		self.contents = ["Knife"]
+		self.doors = {"n": "workshop", "e": "lr", "w": "armory", "s": "courtyard"}	
+
+	def get_random_enemy(self):
+		pass
+	def show_enemy(self):
+        pass

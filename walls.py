@@ -28,7 +28,18 @@ class Walls(Room):
 		self.contents = []
 		self.doors = {"": "", "": ""}
 
+	def repair_wall(self):
+		if "Concrete" in player.items:
+			remove.player.items("Concrete")
+			condition = "Repaired"
+			print("You look at the  've repaired the southern wall.")
+		else:
+			pass
+
+
+#player input option to turn on the turrets, asks for input when the power is online. if reactor.reactor = "Online": switch = input()
+
 #get 
 #walls, contains enemies, but player chooses when to attack them. turrets to interact with and things to repair, use function 
-
+#can get enemies to spawn by using the random enemy function and to change from pass to the function once the conditions are fulfilled
 #method that checks to see if the 

@@ -8,4 +8,4 @@ class Bedroom(Room):
 		#insert description
 		\n"""
 		self.contents = []
-		self.doors = {"": "", "": ""}	
+		self.doors = {"": "", "": ""}

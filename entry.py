@@ -17,4 +17,4 @@ class EntryWay(Room):
 	def get_random_enemy(self):
 		pass
 	def show_enemy(self):
-        pass
+		pass

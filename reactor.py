@@ -12,4 +12,17 @@ class Reactor(Room):
 		#insert description
 		\n"""
 		self.contents = []
-		self.doors = {"": "", "": ""}		
+		self.doors = {"": "", "": ""}
+	#add some random integers to succeed in repairing the generator
+	def repair_reactor(self):
+			if "Reactor Components" in items:
+				repair = input("Would you like to repair the reactor with your Reactor Components? Y or N")
+				if repair == "Y":
+					remove.player.items("Reactor Components")
+					reactor.reactor_condition = "Repaired"
+					print("You've repaired the reactor.")
+				else: 
+					pass
+			else:
+				pass
+	

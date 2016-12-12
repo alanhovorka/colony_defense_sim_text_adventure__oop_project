@@ -5,9 +5,9 @@ class Workshop(Room):
 	def __init__(self, name):
 		super().__init__(name)
 		self.description = """\n
-		#insert description
+		You walk into the workshop. It's in complete disarray and the roof has collasped at the far side of the room 
+		causing items and debries to spill across the floor. 
+		You can go north to the reactor, east to the dining area and south to the armory.
 		\n"""
-		self.doors = {"": "", "": ""}	
-		self.contents = ["Concrete", "Components"]
-
-		
+		self.doors = {"n": "reactor", "s": "armory", "e":"dining"}	
+		self.contents = ["Bag of Quikcrete", "Turret Components", "Reactor Components"]

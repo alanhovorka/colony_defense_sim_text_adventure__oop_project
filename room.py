@@ -13,7 +13,7 @@ class Room:
 		self.special = []
 		self.doors = {}
 		self.enemy = self.get_random_enemy()
-		#what if I don't want rooms to spawn random enemies?
+		
 	def get_description(self):
 		print("{}".format(self.description))
 

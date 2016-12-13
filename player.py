@@ -8,8 +8,12 @@ import sys
 #all_items found list 
 
 class Player(Character):
-	all_items = ["Knife", "Medkit (3/3) uses left", "Medkit (2/3) uses left", "Medkit (1/3) uses left", ".45 Automatic Pistol", "Survival Rifle", "Bag of Quikcrete", "Reactor Components", "Turret Components", "Wood boards", "Batteries (Ammo)", ".50 Caliber Ammo Box", "Safety Gear"] #all possible items, write a command that tells them they've found all possible items
+	all_items = ["Knife", "Medkit (3/3) uses left", "Medkit (2/3) uses left", "Medkit (1/3) uses left", ".45 Automatic Pistol", "Survival Rifle", "Bag of Quikcrete", "Reactor Components", "Turret Components", "Safety Gear"] #all possible items, write a command that tells them they've found all possible items
+	all_items_found = ["Knife", "Medkit (3/3) uses left", ".45 Automatic Pistol", "Survival Rifle", "Bag of Quikcrete", "Reactor Components", "Turret Components", "Safety Gear"]
 	all_enemies = ["Raider Beserker", "Caspian Mole", "Raider Leader", "Raider Grunt", "Raider", "Feral dog", "Space Rat", "Malfunctioning Robot", "Malfunctioning Turret", "Raider Merc", "Giant Fire Ant", "Raider Bruiser"] 
+
+	reactor_status = "Offline"
+	reactor_condition = "Damaged"
 
 	def __init__(self, name, health, attack_pts, location):
 		super().__init__(name, health, attack_pts)
@@ -69,34 +73,102 @@ class Player(Character):
 	def search(self, location):
 		search = True
 		while search:
-			action = input("\nWhat do you want to do?\n1. Search room\n2. Leave room\n")
-			if action == "1":
-				if not location.contents:
-					print("\nYou find nothing of value in the room.\n")
-				else:
-					find = random.randrange(1, 3)
-					if find == 1:
-						found = random.randrange(len(location.contents))
-						item = location.contents.pop(found)
-						print("\nYou found a {}\n".format(item))
-						self.items.append(item)
-						self.items_found.append(item)
-						self.check_items()
-						if not location.contents:
-							print("You've found all of the items!")
-						else:
-							print("There might be more to find in this room...")
+			if "Base Reactor" in location.special:
+				action = input("\nWhat do you want to do?\n1. Search room\n2. Repair reactor\n3. Leave room\n")
+				if action == "1":
+					if not location.contents:
+						print("\nYou find nothing of value in the room.\n")
 					else:
-						print("\nNothing found yet\n")
-			elif action =="2":
-				print("\nLocation reminder: ")
-				location.get_description()
-				next_room = location.get_direction()
-				return next_room   
-				#write a function here that looks for a special container and then runs a use function, maybe vary the input function based on the location.   
+						find = random.randrange(1, 3)
+						if find == 1:
+							found = random.randrange(len(location.contents))
+							item = location.contents.pop(found)
+							print("\nYou found a {}\n".format(item))
+							self.items.append(item)
+							self.items_found.append(item)
+							self.check_items()
+							if not location.contents:
+								print("You've found all of the items!")
+							else:
+								print("There might be more to find in this room...")
+						else:
+							print("\nNothing found yet\n")
+				elif action =="2":
+					if "Reactor Components" in self.items:								
+						repair = input("Would you like to repair the reactor with your Reactor Components? Y or N").lower()
+						if repair == "y":
+							if "Safety Gear" in self.items:
+								self.items.remove("Reactor Components")
+								self.items.remove("Safety Gear")
+								reactor_condition = "Repaired"
+								reactor_status = "Online"
+								if reactor_condition == "Repaired" and reactor_status == "Online":
+									print("""\nYou put on the safety gear, eliminating all chance of during reapirs. 
+									You've repaired the reactor and restored power to the base.
+									It still might be good to search the rest of the base before you repair the walls.\n""")
+								else:
+									pass
+							else:
+								dead = ''
+								chance = random.randint(0,9)
+								if chance > 4:
+									self.items.remove("Reactor Components")
+									reactor_condition = "Repaired"
+									if reactor_condition == "Repaired":
+										print("""\nDespite not having any safety gear, you manage to stay alive while repairing the reactor. You've repaired the reactor and restored power to the base.
+									It still might be good to search the rest of the base before you repair the walls.\n""")
+									else:
+										pass
+								else:
+									self.health = 0
+									dead = self.name
+								if dead:
+									print("\nYou've been electrocuted while trying to repair the reactor. You've died. Game over. Try finding the safety gear.\n")
+									sys.exit()
+									return dead
+								else:
+									pass
+
+						else:
+							pass
+					else:
+						pass
+				else:
+					print("\nLocation reminder: ")
+					location.get_description()
+					next_room = location.get_direction()
+					return next_room			
+			elif not location.special:
+				action = input("\nWhat do you want to do?\n1. Search room\n2. Leave room\n")
+				if action == "1":
+					if not location.contents:
+						print("\nYou find nothing of value in the room.\n")
+					else:
+						find = random.randrange(1, 3)
+						if find == 1:
+							found = random.randrange(len(location.contents))
+							item = location.contents.pop(found)
+							print("\nYou found a {}\n".format(item))
+							self.items.append(item)
+							self.items_found.append(item)
+							self.check_items()
+							if not location.contents:
+								print("You've found all of the items!")
+							else:
+								print("There might be more to find in this room...")
+						else:
+							print("\nNothing found yet\n")
+				else:
+					print("\nLocation reminder: ")
+					location.get_description()
+					next_room = location.get_direction()
+					return next_room   
 			else:
 				pass
-	
+
+
+	#add stuff that boost attack points when picking up weapons
+
 	def check_items(self):
 		print("\nInventory: {}\n".format(', '.join(self.items)))
 		#change this for the items_found list
@@ -145,7 +217,6 @@ class Player(Character):
 
 	def turret_buff(self):
 		pass
-
 	#activates a turret buff that boosts hp for boss fight, print total health before fight
 
 	def check_health(self):
@@ -155,8 +226,4 @@ class Player(Character):
 			self.check_items()
 		else:
 			pass
-
-
-
-
 

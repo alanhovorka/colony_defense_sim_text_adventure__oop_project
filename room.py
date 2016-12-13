@@ -2,7 +2,7 @@ from enemy import Enemy
 import random
 
 class Room:
-	enemies = ["Feral dog", "Caspian Mole", "Space Rat", "Malfunctioning Robot", "Malfunctioning Turret"]
+	enemies = ["Feral dog", "Giant Fire Ant", "Caspian Mole", "Space Rat", "Malfunctioning Robot", "Malfunctioning Turret"]
 
 	#do I need separate enemy lists or can I just desginate to spawn enemies within an index range?
 
@@ -10,6 +10,7 @@ class Room:
 		self.name = name
 		self.description = ""
 		self.contents = []
+		self.special = []
 		self.doors = {}
 		self.enemy = self.get_random_enemy()
 		#what if I don't want rooms to spawn random enemies?
@@ -28,7 +29,7 @@ class Room:
 	def get_random_enemy(self):
 	#should be able to write an if statement that assigns
 	#health to specific enemies i.e. raiders
-# return Enemy(random.choice(enemies), random.randint(4, 6), random.randint(2, 4))
+	# return Enemy(random.choice(enemies), random.randint(4, 6), random.randint(2, 4))
 		rand_index = random.randrange(len(Room.enemies))
 		random_enemy = Room.enemies.pop(rand_index)
 		return Enemy(random_enemy, random.randint(4, 6), random.randint(2, 4))

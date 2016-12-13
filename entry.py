@@ -3,7 +3,6 @@ from room import Room
 #no enemy here
 
 class EntryWay(Room):
-	"""docstring for Entry"""
 	def __init__(self, name):
 		super().__init__(name)
 		self.description = """\n
@@ -12,9 +11,8 @@ class EntryWay(Room):
 		You can head west into the armory, east to the living room and north to the workshop. 
 		\n"""
 		self.contents = ["Knife"]
-		self.doors = {"n": "workshop", "e": "lr", "w": "armory", "s": "courtyard"}	
-
+		self.doors = {"n": "workshop", "e": "lr", "w": "armory", "s": "courtyard"}
+		self.special = []
+		
 	def get_random_enemy(self):
-		pass
-	def show_enemy(self):
-		pass
+		return None

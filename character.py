@@ -16,7 +16,7 @@ class Character:
 			print("\n{} suffered {} damage. {}'s health is now at {} \n".format(defender.name, attack, defender.name, defender.health))
 		elif attack < defense:
 			self.health -= defense
-			print("\n{}sufferecd {} damage. {}'s health is now at {}\n".format(self.name, defense, self.name, self.health))
+			print("\n{}suffered {} damage. {}'s health is now at {}\n".format(self.name, defense, self.name, self.health))
 		else:
 			print("No damage")
 		if self.health < 1:

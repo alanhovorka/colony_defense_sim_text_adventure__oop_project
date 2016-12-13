@@ -12,8 +12,7 @@ The raiders will be back, move quickly.
 \n"""
 		self.doors = {"n": "entry", "s": "walls"}
 		self.contents = []
+		self.special = []
 
 	def get_random_enemy(self):
-		pass
-	def show_enemy(self):
-		pass
+		return None

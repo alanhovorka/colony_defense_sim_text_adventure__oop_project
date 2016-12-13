@@ -7,7 +7,7 @@ class LivingRoom(Room):
 		You spot a book shelf, viewscreen, fireplace and a cabinet. 
 		You can go north, south or west.\n"""
 		self.doors = {"n": "dining", "s": "armory", "w": "entry"}
-		self.contents = []
+		self.contents = ["Survival Rifle"]
+		self.special = []
 
-	#add some items in the room that the player can collect, probably need an investory (aka a list)
-		
+	#add some items in the room that the player can collect

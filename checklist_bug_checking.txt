@@ -3,12 +3,11 @@ make sure all the imports needed are imported, especially in walls and reactor
 make sure functions and variables are consistent and named properly. 
 
 Check out the \n syntax, make sure spacing is ok
-
-Check all of the notes 
-
-import system once 
+check all of the notes
 
 Make sure they can complete the game under the player file
-sys.exit()
 
-items found list and player inventor
+\n creates line breaks
+
+Make game harder
+base power stil isn't working

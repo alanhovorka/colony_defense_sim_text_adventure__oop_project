@@ -5,7 +5,7 @@ from entry import EntryWay
 from dining_room import DiningRoom
 from courtyard import Courtyard
 from walls import Walls
-from bedroom import Bedroom
+from bedroom import Barracks
 from room import Room
 from character import Character
 from living_room import LivingRoom
@@ -45,8 +45,8 @@ Type q to end the program.\n"""
 				loc = dining
 			elif new_loc == "walls":
 				loc = walls
-			elif new_loc == "bedroom":
-				loc = bedroom
+			elif new_loc == "barracks":
+				loc = barracks
 			elif new_loc == "courtyard":
 				loc = courtyard
 			elif new_loc == "lr":
@@ -70,7 +70,7 @@ kitchen = Kitchen("kitchen")
 entry = EntryWay("entry way")
 walls = Walls("walls")
 lr = LivingRoom("living room")
-bedroom = Bedroom("bedroom")
+barracks = Barracks("barracks")
 courtyard = Courtyard("courtyard")
 dining = DiningRoom("dining room")
 reactor = Reactor("reactor")

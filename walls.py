@@ -1,19 +1,10 @@
 from enemy import Enemy
 from room import Room
-from player import Player
 import random
 import sys
 
-#spawn raid function using time, player function that they can check to see how long until they have to fight the raiders. 
-#Should be able to intialitzie the raid at the walls if they have all the items
-#If they run out of time, they break in and spawn randomly in rooms, rushing through the building
-#Walls should be its own class
-#Should be a use function that repairs the walls, turrets and locks the gate
-#How to make turrets act as friendly npcs
-#need of a list of items in the rooms
 class Walls(Room):
-	raid = ["Raider Beserker", "Raider Grunt", "Raider", "Raider", "Raider Merc", "Raider Bruiser"]
-	raidlead = ["Raider Leader"]
+	raiders = ["Raider Beserker", "Raider Grunt", "Raider", "Raider", "Raider Merc", "Raider Bruiser"]
 
 	def __init__(self, name):
 		super().__init__(name)
@@ -27,21 +18,24 @@ class Walls(Room):
 		self.contents = []
 		self.doors = {"n": "courtyard"}
 		self.special = ["Damaged Walls"]
-		#self.
+		self.enemy = []
 
 	def get_random_enemy(self):
 		return None
 
-	def raid(self):
-		if Player.turret_power == "Online" and Player.self.location =="walls":
-			print("it works")
-		else:	
-			pass
+	def spawn(self):
+		for raider in Walls.raiders:
 
-	def spawn_raiders(self):
-		pass
+			#new_enemy = random.choice(Walls.raiders)
+			self.enemy.append(Enemy(raider, random.randint(5, 10), random.randint(5, 10)))
+		self.enemy.append(Enemy("Raider Leader", random.randint(10, 15), random.randint(10, 15) ))
+		print("The raiders have returned!")
 
-#repeat some of these functions with tweaks for the raid
+
+	def show_enemy(self):
+		for i in self.enemy:
+			print(i.name)
+			print("In the group of raiders, there is a {} with {} HP and {} attack points!".format(i.name, i.health, i.attack_pts))
 
 #should be able to write an if statement that assigns
 	#health to specific enemies i.e. raiders

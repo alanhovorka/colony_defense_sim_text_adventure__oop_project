@@ -6,7 +6,6 @@ class Character:
 		self.health = health
 		self.attack_pts = attack_pts
 
-#make combat harder
 	def combat(self, defender):
 		dead = ''
 		attack = int(random.random()*self.attack_pts)

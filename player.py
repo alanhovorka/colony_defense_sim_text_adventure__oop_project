@@ -1,4 +1,6 @@
 from character import Character
+from walls import Walls
+from room import Room
 import random
 import time
 import sys
@@ -7,6 +9,7 @@ class Player(Character):
 	all_items = ["Knife", "Medkit (3/3) uses left", "Medkit (2/3) uses left", "Medkit (1/3) uses left", ".45 Automatic Pistol", "Survival Rifle", "Bag of Quikcrete", "Reactor Components", "Turret Components", "Safety Gear"] #all possible items, write a command that tells them they've found all possible items
 	all_items_found = ["Knife", "Medkit (3/3) uses left", ".45 Automatic Pistol", "Survival Rifle", "Bag of Quikcrete", "Reactor Components", "Turret Components", "Safety Gear"]
 	all_enemies = ["Caspian Mole", "Feral dog", "Space Rat", "Malfunctioning Robot", "Malfunctioning Turret", "Giant Fire Ant"] 
+	all_raiders = ["Raider Beserker", "Raider Grunt", "Raider", "Raider", "Raider Merc", "Raider Bruiser", "Raider Leader"]
 	reactor_status = "Offline"
 	reactor_condition = "Damaged"
 	wall_condition = "Damaged"
@@ -24,7 +27,7 @@ class Player(Character):
 		self.endgame = ["start"]
 		self.items_found = []
 		self.kill_list = []
-	
+
 	def explore(self, location):
 		location.get_description()
 		if location.enemy:
@@ -68,6 +71,8 @@ class Player(Character):
 						self.check_health()
 						if self.complete_kill_list() == True:
 							print("You've killed all of the raiders!")
+
+						#can change it to the location list or something
 					fight = False
 
 					#win message here with sys.exit()
@@ -206,16 +211,14 @@ class Player(Character):
 							self.endgame.remove("start")
 							Player.turret_power = "Online"
 							self.turret_buff()
-							#insert raid functions
+							if Player.turret_power == "Online":
+								location.spawn()
+								location.show_enemy()
+								if location.enemy:
+									self.fight_or_flight(location)
+								else:
+									pass
 							
-
-
-
-
-
-
-
-
 
 
 

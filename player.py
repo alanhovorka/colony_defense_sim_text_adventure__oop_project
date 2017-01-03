@@ -9,7 +9,7 @@ class Player(Character):
 	all_items = ["Knife", "Medkit (3/3) uses left", "Medkit (2/3) uses left", "Medkit (1/3) uses left", ".45 Automatic Pistol", "Survival Rifle", "Bag of Quikcrete", "Reactor Components", "Turret Components", "Safety Gear"] #all possible items, write a command that tells them they've found all possible items
 	all_items_found = ["Knife", "Medkit (3/3) uses left", ".45 Automatic Pistol", "Survival Rifle", "Bag of Quikcrete", "Reactor Components", "Turret Components", "Safety Gear"]
 	all_enemies = ["Caspian Mole", "Feral dog", "Space Rat", "Malfunctioning Robot", "Malfunctioning Turret", "Giant Fire Ant"] 
-	all_raiders = ["Raider Beserker", "Raider Grunt", "Raider", "Raider", "Raider Merc", "Raider Bruiser", "Raider Leader"]
+	all_raiders = ["Raider Beserker", "Raider Grunt", "Raider Gunner", "Raider", "Raider Merc", "Raider Bruiser", "Raider Leader"]
 	reactor_status = "Offline"
 	reactor_condition = "Damaged"
 	wall_condition = "Damaged"
@@ -27,6 +27,7 @@ class Player(Character):
 		self.endgame = ["start"]
 		self.items_found = []
 		self.kill_list = []
+		self.raider_kill_list = []
 
 	def explore(self, location):
 		location.get_description()
@@ -52,9 +53,6 @@ class Player(Character):
 							location.enemy = ""
 						self.check_kill_list()
 						self.check_health()
-						#Here's where we put our win function for if they defeat the raiders
-						if self.complete_kill_list() == True:
-							print("You've killed all of the raiders!")
 					fight = False
 			else:
 				print("{} attacks you!".format(location.enemy.name))
@@ -69,14 +67,7 @@ class Player(Character):
 							location.enemy = ""
 						self.check_kill_list()
 						self.check_health()
-						if self.complete_kill_list() == True:
-							print("You've killed all of the raiders!")
-
-						#can change it to the location list or something
 					fight = False
-
-					#win message here with sys.exit()
-					#should not be able to flee
 
 
 	def search(self, location):
@@ -215,15 +206,9 @@ class Player(Character):
 								location.spawn()
 								location.show_enemy()
 								if location.enemy:
-									self.fight_or_flight(location)
+									self.battle(location)
 								else:
 									pass
-							
-
-
-
-
-
 						else:
 							pass
 					else:
@@ -326,9 +311,12 @@ class Player(Character):
 
 	def check_kill_list(self):
 		print("\nKill list: {}\n".format(', '.join(self.kill_list)))
+
+	def check_raider_kill_list(self):
+		print("\nRaider kill list: {}\n".format(', '.join(self.raider_kill_list)))
 		
 	def complete_kill_list(self):
-		killed_all_enemies = set(self.all_enemies) == set(self.kill_list)
+		killed_all_enemies = set(self.all_raiders) == set(self.raider_kill_list)
 		return killed_all_enemies
 
 	def turret_buff(self):
@@ -354,3 +342,40 @@ class Player(Character):
 		else:
 			pass
 
+	def battle(self, location):
+		for each_enemy in location.enemy:
+			fight = True
+			while fight:
+				reaction = input("\nDo you want to attack? y or n\n").lower()
+				if reaction == "y":
+					outcome = self.combat(each_enemy)
+					if outcome:
+						if outcome == self.name:
+							print("\nGame over!\n")
+							sys.exit()		
+						else:
+							self.raider_kill_list.append(outcome)					
+							if outcome == each_enemy.name:
+								location.enemy.remove(each_enemy)
+							self.check_raider_kill_list()
+						#Here's where we put our win function for if they defeat the raiders
+							if self.complete_kill_list() == True:
+								print("You've killed all of the raiders and completed the game!")
+								sys.exit()
+						fight = False
+				else:
+					print("{} attacks you!".format(each_enemy.name))
+					outcome = each_enemy.combat(self)
+					if outcome:
+						if outcome == self.name:
+							print("\nGame over!\n")
+							sys.exit()
+						else:
+							self.raider_kill_list.append(outcome)
+							if outcome == each_enemy:
+									location.enemy.remove(each_enemy)
+							self.check_kill_list()
+							if self.complete_kill_list() == True:
+								print("You've killed all of the raiders and completed the game!")
+								sys.exit()
+						fight = False

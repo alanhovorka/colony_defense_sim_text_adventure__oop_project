@@ -1,8 +1,0 @@
-checklist
-
-check all of the notes
-
-Make sure they can complete the game under the player file
-
-Make sure they can win, fight all the last enemies, complete list and that they can't flee
-

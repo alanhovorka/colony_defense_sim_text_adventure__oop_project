@@ -14,12 +14,9 @@ class Player(Character):
 	reactor_condition = "Damaged"
 	wall_condition = "Damaged"
 	turret_power = "Offline"
-	turret_condition = "Repaired"
-	gate_power = "Online"
-	base_power = "Online"
-	#turret_condition = "Damaged"
-	#gate_power = "Offline"
-	#base_power = "Offline"
+	turret_condition = "Damaged"
+	gate_power = "Offline"
+	base_power = "Offline"
 	def __init__(self, name, health, attack_pts, location):
 		super().__init__(name, health, attack_pts)
 		self.location = location
@@ -355,10 +352,7 @@ class Player(Character):
 							sys.exit()		
 						else:
 							self.raider_kill_list.append(outcome)					
-							if outcome == each_enemy.name:
-								location.enemy.remove(each_enemy)
 							self.check_raider_kill_list()
-						#Here's where we put our win function for if they defeat the raiders
 							if self.complete_kill_list() == True:
 								print("You've killed all of the raiders and completed the game!")
 								sys.exit()
@@ -372,10 +366,13 @@ class Player(Character):
 							sys.exit()
 						else:
 							self.raider_kill_list.append(outcome)
-							if outcome == each_enemy:
-									location.enemy.remove(each_enemy)
 							self.check_kill_list()
 							if self.complete_kill_list() == True:
 								print("You've killed all of the raiders and completed the game!")
 								sys.exit()
 						fight = False
+		del location.enemy[:]
+		print("""\nYou've killed all of the raiders and completed the game!
+As the last raider falls, you look around at the destruction and the desolate landscape of your new world, unsure of what to do.
+Looking back at your home, where everyone sleeps, you open the gates and step outside the colony's walls and take your first lonely step out onto this Rimworld.\n""")
+
